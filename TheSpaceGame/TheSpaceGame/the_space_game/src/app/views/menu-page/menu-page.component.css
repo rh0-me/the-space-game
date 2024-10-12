@@ -1,0 +1,187 @@
+.gameMenu {
+    padding: 4em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Zentriert die Buttons vertikal in der Mitte */
+    height: 100vh; /* Volle Höhe des Bildschirms */
+    position: relative; /* Notwendig für die absolute Positionierung des Titels */
+
+    /* background-image: url('../../../assets/images/night-sky-starry-galaxy-universe.jpg');*/
+    background-size: cover; /* Streckt das Bild, sodass es den ganzen Hintergrund bedeckt */
+    background-position: center; /* Zentriert das Bild */
+    background-repeat: no-repeat; /* Verhindert, dass das Bild wiederholt wird */
+    background-attachment: fixed;
+    position: relative; /* Notwendig für absolute Positionierung von ::before */
+    z-index: 1; /* Sicherstellen, dass der Inhalt über dem Hintergrund bleibt */
+    overflow: hidden; /* Verhindert, dass das ::before-Element über den Container hinausragt */
+}
+
+/* Hintergrundbild nur auf dem ::before-Pseudo-Element */
+.gameMenu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgb(5,15,30);
+    background: linear-gradient(180deg, rgba(5,15,30,1) 0%, rgba(8,20,40,1) 25%, rgba(10,30,60,1) 50%, rgba(12,40,70,1) 75%, rgba(15,50,80,1) 100%);
+    
+    
+    z-index: -1; /* Das Hintergrundbild bleibt hinter dem Inhalt */
+}
+
+.menuTitle {
+    text-align: center;
+    font-size: 60px; /* Großzügige Schriftgröße */
+    font-weight: bold; /* Fetter Text */
+    color: white; /* Weißer Text */
+    text-transform: uppercase; /* Großbuchstaben für einen futuristischen Look */
+    letter-spacing: 1px; /* Abstand zwischen den Buchstaben für besseren Lesefluss */
+    animation: pulse 3s infinite; /* Bereits vorhandene Animation */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), /* Leichtes weißes Leuchten */
+                 0 0 20px rgba(0, 153, 255, 0.8), /* Bläuliches Außenleuchten */
+                 0 0 30px rgba(0, 153, 255, 0.8), /* Weitere Ebenen für Tiefe */
+                 0 0 40px rgba(0, 0, 255, 1); /* Intensiver blaues Leuchten */
+
+    position: absolute; /* Titel bleibt oben */
+    top: 5%; /* Position des Titels anpassen */
+    z-index: 2; /* Sicherstellen, dass der Text über dem Hintergrund bleibt */
+   
+    word-spacing: 2px;
+    font-weight: 888;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        text-shadow: 0 0 10px rgba(27, 27, 27, 0.8), 
+                     0 0 20px rgba(0, 153, 255, 0.8),
+                     0 0 30px rgba(0, 153, 255, 0.8),
+                     0 0 40px rgba(0, 0, 255, 1);
+    }
+    50% {
+        transform: scale(1.5); /* Leichtes Vergrößern beim Pulsieren */
+        text-shadow: 0 0 20px rgba(255, 255, 255, 1), 
+                     0 0 30px rgba(0, 153, 255, 1),
+                     0 0 40px rgba(0, 153, 255, 1),
+                     0 0 50px rgba(0, 0, 255, 1.2); /* Intensiveres Leuchten in der Mitte der Animation */
+    }
+    100% {
+        transform: scale(1);
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 
+                     0 0 20px rgba(0, 153, 255, 0.8),
+                     0 0 30px rgba(0, 153, 255, 0.8),
+                     0 0 40px rgba(0, 0, 255, 1);
+    }
+}
+
+
+.menuButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em; /* Abstand zwischen den Buttons */
+    width: 300px; /* Breitere Buttons */
+}
+
+.menuButtons button {
+    padding: 1em 2em; /* Vergrößert die Buttons */
+    font-size: 1.2em; /* Größere Schriftgröße in den Buttons */
+    width: 100%; /* Die Buttons nehmen die volle Breite des Containers ein */
+    border-radius: 10px; /* Optional: abgerundete Ecken */
+    border: none; /* Entfernt die Standard-Rahmen */
+    cursor: pointer; /* Ändert den Mauszeiger bei Hover */
+}
+
+.menuButtons button:hover {
+    background-color: #7d90a5; /* Ändert die Farbe bei Hover */
+}
+.essentials {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Die Meteoriten dürfen die Interaktionen nicht blockieren */
+}
+
+.meteorid {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    /*background: rgba(255, 255, 255, 0.8);*/
+    background: url('../../../assets/icons/meteorit.png');
+    background-repeat: no-repeat;
+    position: absolute;
+    animation: fly 10s linear infinite;
+}
+
+/* Container für die fliegenden Raumschiffe */
+.spaceships {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Raumschiffe blockieren keine Interaktionen */
+    z-index: 1;
+}
+
+/* Einzelnes Raumschiff */
+.spaceship {
+    height: 100px;
+    width: 100px;
+    background: url('../../../assets/icons/spaceship.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: -150px; /* Startet unterhalb des Bildschirms */
+    left: 50%; /* Horizontale Mitte */
+    transform: translateX(-50%); /* Korrekte Zentrierung */
+    animation: fly_spaceship 2s linear infinite;
+}
+
+/* Keyframes für das Fliegen von unten nach oben */
+@keyframes fly_spaceship {
+    0% {
+        transform: translateX(-50%) translateY(100vh); /* Startet unterhalb des Bildschirms */
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-50%) translateY(-150vh); /* Fliegt nach oben aus dem Bildschirm raus */
+        opacity: 0; /* Wird unsichtbar, wenn es den Bildschirm verlässt */
+    }
+}
+
+/* Unterschiedliche Startpositionen und Animationszeiten */
+.spaceships span:nth-child(1) { left: 10%; animation-duration: 4s; }
+.spaceships span:nth-child(2) { left: 30%; animation-duration: 5s; }
+.spaceships span:nth-child(3) { left: 70%; animation-duration: 7s; }
+.spaceships span:nth-child(4) { left: 90%; animation-duration: 5s; }
+.spaceships span:nth-child(5) { left: 50%; animation-duration: 9s; }
+
+/* Zufällige Startpositionen der Meteoriten */
+.essentials span:nth-child(1) { top: 10%; left: -5%; animation-duration: 5s; }
+.essentials span:nth-child(2) { top: 30%; left: -10%; animation-duration: 6s; }
+.essentials span:nth-child(3) { top: 50%; left: -15%; animation-duration: 8s; }
+.essentials span:nth-child(4) { top: 70%; left: -20%; animation-duration: 7s; }
+.essentials span:nth-child(5) { top: 90%; left: -25%; animation-duration: 9s; }
+.essentials span:nth-child(6) { top: 20%; left: -30%; animation-duration: 5s; }
+.essentials span:nth-child(7) { top: 40%; left: -35%; animation-duration: 6s; }
+.essentials span:nth-child(8) { top: 60%; left: -40%; animation-duration: 10s; }
+.essentials span:nth-child(9) { top: 80%; left: -45%; animation-duration: 8s; }
+.essentials span:nth-child(10) { top: 95%; left: -50%; animation-duration: 9s; }
+
+/* Keyframes für die Bewegung der Meteoriden */
+@keyframes fly {
+    0% {
+        transform: translateX(0) translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(150vw) translateY(50vh) ; 
+        opacity: 0;
+    }
+}

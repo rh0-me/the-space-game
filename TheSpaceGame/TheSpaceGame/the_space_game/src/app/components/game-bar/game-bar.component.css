@@ -1,0 +1,61 @@
+/* Allgemeiner Stil für alle Buttons */
+.controls {
+    display: flex;
+    direction: column;
+    gap: 1em;
+}
+
+.building-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    background-repeat: no-repeat;
+    background-size: 32px 32px;
+    /* Größe des Icons */
+    background-position: top center;
+    /* Bild oben zentriert */
+    padding-top: 40px;
+    /* Platz für das Bild */
+    height: 80px;
+    width: 80px;
+    /* Optional: Einheitliche Breite für Buttons */
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.building-btn span {
+    margin-top: 8px;
+    /* Abstand zwischen Bild und Text */
+    display: block;
+}
+
+/* Spezifische Hintergrundbilder für verschiedene Gebäude */
+.reactor {
+    background-image: url('/assets/icons/reactor.png');
+}
+
+.laser {
+    background-image: url('/assets/icons/laser.png');
+}
+
+.missile-station {
+    background-image: url('/assets/icons/long_range_missile_station.png');
+}
+
+.miner {
+    background-image: url('/assets/icons/miner.png');
+}
+
+.energy-storage {
+    background-image: url('/assets/icons/energy_storage.png');
+}
+
+.grid-connector {
+    background-image: url('/assets/icons/grid_connector.png');
+}
+
+.repair-station {
+    background-image: url('/assets/icons/repair_station.png');
+}

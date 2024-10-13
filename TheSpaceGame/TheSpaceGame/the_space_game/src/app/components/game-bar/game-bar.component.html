@@ -1,40 +1,50 @@
 <div class="controls">
-    <button class="building-btn reactor" (click)="selectBuilding(Buildings.Reactor)">
-        <span>Reaktor</span>
-    </button>
-    <button class="building-btn laser" (click)="selectBuilding(Buildings.Laser)">
-        <span>Laser</span>
-    </button>
-    <button class="building-btn missile-station" (click)="selectBuilding(Buildings.LongRangeMissileStation)">
-        <span>LRMS</span>
-    </button>
-    <button class="building-btn miner" (click)="selectBuilding(Buildings.Miner)">
-        <span>Miner</span>
-    </button>
-    <button class="building-btn energy-storage" (click)="selectBuilding(Buildings.EnergyStorage)">
-        <span>Energy Storage</span>
-    </button>
-    <button class="building-btn grid-connector" (click)="selectBuilding(Buildings.EnergyGridConnector)">
-        <span>Connector</span>
-    </button>
-    <button class="building-btn repair-station" (click)="selectBuilding(Buildings.RepairStation)">
-        <span>Repair-Station</span>
+  <button
+    class="building-btn reactor"
+    (click)="selectBuilding(Buildings.Reactor, $event)"
+  >
+    <span>Reaktor</span>
+  </button>
+  <button class="building-btn laser" (click)="selectBuilding(Buildings.Laser, $event)">
+    <span>Laser</span>
+  </button>
+  <button
+    class="building-btn missile-station"
+    (click)="selectBuilding(Buildings.LongRangeMissileStation, $event)"
+  >
+    <span>LRMS</span>
+  </button>
+  <button class="building-btn miner" (click)="selectBuilding(Buildings.Miner, $event)">
+    <span>Miner</span>
+  </button>
+  <button
+    class="building-btn energy-storage"
+    (click)="selectBuilding(Buildings.EnergyStorage, $event)"
+  >
+    <span>Energy Storage</span>
+  </button>
+  <button
+    class="building-btn grid-connector"
+    (click)="selectBuilding(Buildings.EnergyGridConnector, $event)"
+  >
+    <span>Connector</span>
+  </button>
+  <button
+    class="building-btn repair-station"
+    (click)="selectBuilding(Buildings.RepairStation, $event)"
+  >
+    <span>Repair-Station</span>
+  </button>
+
+  <div class="game-status">
+    <p>{{ this.getTimeString() }}</p>
+
+    <button type="button" class="btn btn-light">
+      <i class="bi bi-pause-circle-fill"></i>
     </button>
 
-    <div class="game-status">
-
-        <p>{{  this.getTimeString() }}</p>
-
-        <button type="button" class="btn btn-light">
-            <i class="bi bi-pause-circle-fill"></i>
-        </button>
-    
-        <button type="button" class="btn btn-light">
-            <i class="bi bi-play-fill"></i>
-        </button>
-        
-          
-    </div>
+    <button type="button" class="btn btn-light">
+      <i class="bi bi-play-fill"></i>
+    </button>
+  </div>
 </div>
-
-

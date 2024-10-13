@@ -1,9 +1,16 @@
 <div class="game-container">
-    <canvas #canvas [width]="innerWidth-100" [height]="innerHeight-100" (click)="onCanvasClick($event)"
-        style="border: 1px solid black;"></canvas>
+  <canvas
+    #canvas
+    [width]="innerWidth - 100"
+    [height]="innerHeight - 100"
+    (click)="onCanvasClick($event)"
+    style="border: 1px solid black"
+  ></canvas>
 </div>
 
-<app-game-bar></app-game-bar>
+<app-game-bar
+  (selectedBuildingEvent)="buildingInGameBarSelected($event)"
+></app-game-bar>
 
 <!--<div class="controls">
     <button class="building-btn reactor" (click)="selectBuilding(Buildings.Reactor)">

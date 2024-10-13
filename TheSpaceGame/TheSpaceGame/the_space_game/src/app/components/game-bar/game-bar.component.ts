@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Buildings } from 'src/app/enums/buildings.enum';
 import { GameManagerService } from 'src/app/services/game-manager.service';
 import { Moment } from 'moment/moment';
@@ -14,6 +14,7 @@ export class GameBarComponent {
 
   private selectedBuildingType: Buildings | null = null;
   private selectedBuildingElement: HTMLElement | null = null;
+  @Output() selectedBuildingEvent = new EventEmitter<Buildings>();
 
   constructor(private gameService: GameManagerService) {}
 
@@ -36,6 +37,8 @@ export class GameBarComponent {
     target.style.backgroundColor = 'aquamarine';
     this.selectedBuildingElement = target;
     this.selectedBuildingType = buildingType; // Setzt den aktuellen Gebäudetyp
+
+    this.selectedBuildingEvent.emit(buildingType); // emit to game canvas
   }
 
   // #getTime(): Date {

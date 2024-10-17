@@ -12,97 +12,104 @@ import { EnergyStorage } from '../models/energy-storage.model';
 import { LongRangeMissileStation } from '../models/long-range-missile-station.model';
 import { RepairStation } from '../models/repair-station.model';
 import { EnergyGridConnector } from '../models/energy-grid-connector.model';
+import { AbstractGameEntityFactory } from '../pattern/abstract-game-entity-factory';
+import { GameEntityFactory } from '../pattern/game-entity-factory';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class GameManagerService {
+  private isGameRunning: boolean = false;
+  private timeRunning: Date = new Date();
+  private gameSpeed: number = 1; //TODO: Needed for replay speed, later
+  private gameTick: number = 0; // TODO: Needed for replays, later
+  private gameEntityFactory: AbstractGameEntityFactory =
+    new GameEntityFactory();
 
-    private isGameRunning: boolean = false;
-    private timeRunning: Date = new Date();
+  constructor(
+    private economyService: EconomyService,
+    private enemyWaveManager: EnemyWaveManagerService
+  ) {
+    this.#initializeGame();
+  }
 
-    constructor(
-        private economyService: EconomyService,
-        private enemyWaveManager: EnemyWaveManagerService
-    ) {
-        this.#initializeGame();
+  #initializeGame(): void {
+    this.isGameRunning = true;
+    this.timeRunning = new Date();
+
+    // Spiel initialisieren, z.B. Startressourcen festlegen
+    this.economyService.addMinerals(1000);
+    this.economyService.produceEnergy(1000);
+  }
+
+  public getRunningTime(): number {
+    var time = new Date().getTime() - this.timeRunning.getTime();
+    return time;
+  }
+
+  updateGame(): void {
+    // Hauptspiel-Update, das die Timer und Gegnerwellen aktualisiert
+    this.enemyWaveManager.updateEnemies();
+    // Weitere Spielmechaniken wie Ressourcenproduktion
+  }
+
+  checkGameOver(): boolean {
+    // Überprüfen, ob das Spiel vorbei ist (z.B. alle Gebäude zerstört oder Zeit abgelaufen)
+    return false; // Beispiel
+  }
+
+  placeBuilding(building: PlaceableBuilding): void {
+    // Logik, um ein Gebäude zu platzieren
+    if (this.economyService.consumeMinerals(building.buildCosts)) {
+      // Gebäude hinzufügen
     }
+  }
 
-    #initializeGame(): void {
-        this.isGameRunning = true;
-        this.timeRunning = new Date();
-
-        // Spiel initialisieren, z.B. Startressourcen festlegen
-        this.economyService.addMinerals(1000);
-        this.economyService.produceEnergy(1000);
-    }
-
-    public getRunningTime(): number {
-        var time = new Date().getTime() - this.timeRunning.getTime();
-        return time;
-    }
-
-    updateGame(): void {
-        // Hauptspiel-Update, das die Timer und Gegnerwellen aktualisiert
-        this.enemyWaveManager.updateEnemies();
-        // Weitere Spielmechaniken wie Ressourcenproduktion
-    }
-
-    checkGameOver(): boolean {
-        // Überprüfen, ob das Spiel vorbei ist (z.B. alle Gebäude zerstört oder Zeit abgelaufen)
-        return false;  // Beispiel
-    }
-
-    placeBuilding(building: PlaceableBuilding): void {
-        // Logik, um ein Gebäude zu platzieren
-        if (this.economyService.consumeMinerals(building.buildCosts)) {
-            // Gebäude hinzufügen
+  createBuilding(buildingType: Buildings, position: Vector2D): Building | null {
+    let newBuilding: Building | null = null;
+    switch (buildingType) {
+      case Buildings.Reactor:
+        if (this.economyService.consumeMinerals(Reactor.BUILD_COSTS)) {
+          newBuilding = this.gameEntityFactory.CreateReactor(position);
         }
-    }
-
-    createBuilding(buildingType: Buildings, position: Vector2D): Building | null {
-        let newBuilding: Building | null = null;
-        switch (buildingType) {
-            
-            case Buildings.Reactor:
-                if (this.economyService.consumeMinerals(20)) {
-                    newBuilding = new Reactor(position);
-                }
-                break;
-            case Buildings.Miner:
-                if (this.economyService.consumeMinerals(10)) {
-                    newBuilding = new Miner(position);
-                }
-                break;
-            case Buildings.Laser:
-                if (this.economyService.consumeMinerals(15)) {
-                    newBuilding = new Laser(position);
-                }
-                break;
-            case Buildings.EnergyStorage:
-                if (this.economyService.consumeMinerals(25)) {
-                    newBuilding = new EnergyStorage(position);
-                }
-                break;
-            case Buildings.EnergyGridConnector:
-                if (this.economyService.consumeMinerals(5)) {
-                    newBuilding = new EnergyGridConnector(new Vector2D(0,0), new Vector2D(0, 0), new Vector2D(5, 5));
-                }
-                break;
-            case Buildings.LongRangeMissileStation:
-                if (this.economyService.consumeMinerals(30)) {
-                    newBuilding = new LongRangeMissileStation(position);
-                }
-                break;
-                case Buildings.RepairStation:
-                if (this.economyService.consumeMinerals(30)) {
-                    newBuilding = new RepairStation(position);
-                }
-                break;
-
+        break;
+      case Buildings.Miner:
+        if (this.economyService.consumeMinerals(Miner.BUILD_COSTS)) {
+          newBuilding = this.gameEntityFactory.CreateMiner(position);
         }
-
-        return newBuilding;
+        break;
+      case Buildings.Laser:
+        if (this.economyService.consumeMinerals(Laser.BUILD_COSTS)) {
+          newBuilding = this.gameEntityFactory.CreateLaser(position);
+        }
+        break;
+      case Buildings.EnergyStorage:
+        if (this.economyService.consumeMinerals(EnergyStorage.BUILD_COSTS)) {
+          newBuilding = this.gameEntityFactory.CreateEnergyStorage(position);
+        }
+        break;
+      case Buildings.EnergyGridConnector:
+        if (this.economyService.consumeMinerals(EnergyGridConnector.BUILD_COSTS)) {
+          newBuilding = this.gameEntityFactory.CreateEnergyGridConnector(
+            position,
+            new Vector2D(0, 0),
+            new Vector2D(0, 0)
+          );
+        }
+        break;
+      case Buildings.LongRangeMissileStation:
+        if (this.economyService.consumeMinerals(LongRangeMissileStation.BUILD_COSTS)) {
+          newBuilding =
+            this.gameEntityFactory.CreateLongRangeMissileStation(position);
+        }
+        break;
+      case Buildings.RepairStation:
+        if (this.economyService.consumeMinerals(RepairStation.BUILD_COSTS)) {
+          newBuilding = this.gameEntityFactory.CreateRepairStation(position);
+        }
+        break;
     }
 
+    return newBuilding;
+  }
 }

@@ -13,15 +13,6 @@ import { throwError } from 'rxjs';
 export class GameBarComponent {
   Buildings = Buildings;
 
-  private readonly keys: { [key: string]: boolean } = {
-    '1': false,
-    '2': false,
-    '3': false,
-    '4': false,
-    '5': false,
-    '6': false,
-    '7': false,
-  };
   private currentBuildingType: Buildings | null = null;
   private currentSelectedBuildingElement: HTMLElement | null = null;
   @Output() selectedBuildingEvent = new EventEmitter<Buildings>();
@@ -63,12 +54,7 @@ export class GameBarComponent {
     );
   }
 
-  private resetSelectionAndHighlight(): void;
-  private resetSelectionAndHighlight(
-    buildingType: Buildings,
-    target: HTMLElement
-  ): void;
-  private resetSelectionAndHighlight(): void {
+  public resetSelectionAndHighlight(): void {
     if (this.currentSelectedBuildingElement !== null) {
       this.currentSelectedBuildingElement.style.backgroundColor = '';
       this.currentSelectedBuildingElement = null;
@@ -90,14 +76,12 @@ export class GameBarComponent {
 
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent): void {
-    this.keys[event.key] = true;
-    console.log(this.keys);
-
     const result = this.getBuildingAndButton(event.key);
     if (result) {
       const [buildingType, buildingButton] = result;
       if (buildingButton) {
         if (buildingButton instanceof HTMLElement) {
+          this.resetSelectionAndHighlight();
           buildingButton.style.backgroundColor = 'aquamarine';
         }
       }
@@ -108,8 +92,6 @@ export class GameBarComponent {
   // Listener für das Loslassen der Tasten
   @HostListener('window:keyup', ['$event'])
   handleKeyUp(event: KeyboardEvent): void {
-    this.keys[event.key] = false;
-    console.log(this.keys);
     const result = this.getBuildingAndButton(event.key);
     if (result) {
       const [building, buildingButton] = result;

@@ -14,7 +14,7 @@ export class SpaceShipEnsign extends Enemy {
     // Feind zeichnen
     override draw(ctx: CanvasRenderingContext2D): void {
         ctx.fillStyle = 'red';  // Farbe für das feindliche Raumschiff
-        ctx.fillRect(this.position.x, this.position.y, 30, 30);
+        ctx.fillRect(this.position.x, this.position.y, 30, 30);// TODO: Change drawing position?
         ctx.fillStyle = 'white';
         ctx.fillText('Ensign', this.position.x, this.position.y - 5);
     }

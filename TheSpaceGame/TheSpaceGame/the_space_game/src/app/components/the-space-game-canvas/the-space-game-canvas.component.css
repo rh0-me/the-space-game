@@ -4,7 +4,6 @@
     direction: column;
     gap: 1em;
 }
-
 .building-btn {
     display: flex;
     flex-direction: column;

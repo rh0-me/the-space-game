@@ -14,7 +14,7 @@ export class SpaceShipCrusader extends Enemy {
     // Feind zeichnen
     override draw(ctx: CanvasRenderingContext2D): void {
         ctx.fillStyle = 'blue';  // Farbe für das feindliche Raumschiff
-        ctx.fillRect(this.position.x, this.position.y, 40, 40);
+        ctx.fillRect(this.position.x, this.position.y, 40, 40); //TODO: Change drawing position?
         ctx.fillStyle = 'white';
         ctx.fillText('Crusader', this.position.x, this.position.y - 5);
     }

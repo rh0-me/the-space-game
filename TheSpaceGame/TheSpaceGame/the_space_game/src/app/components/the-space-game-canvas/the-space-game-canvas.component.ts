@@ -10,6 +10,7 @@ import { Building } from 'src/app/models/building.model';
 import { Reactor } from 'src/app/models/reactor.model';
 import { Vector2D } from 'src/app/models/vector2d.model';
 import { GameManagerService } from 'src/app/services/game-manager.service';
+import { GameBarComponent } from '../game-bar/game-bar.component';
 
 @Component({
   selector: 'game-canvas',
@@ -20,6 +21,7 @@ export class TheSpaceGameCanvasComponent implements OnInit {
   Buildings = Buildings;
   @ViewChild('canvas', { static: true })
   gameCanvas!: ElementRef<HTMLCanvasElement>;
+  @ViewChild(GameBarComponent) gameBar!: GameBarComponent;
 
   private ctx!: CanvasRenderingContext2D;
 
@@ -118,6 +120,39 @@ export class TheSpaceGameCanvasComponent implements OnInit {
     this.selectBuilding(building);
   }
   selectBuilding(buildingType: Buildings): void {
+    const canvas = document.getElementsByTagName(
+      'canvas'
+    )[0] as HTMLCanvasElement;
+
+    switch (buildingType) {
+      case Buildings.Reactor:
+        canvas.style.cursor = 'url(/assets/icons/reactor.png), auto';
+        break;
+      case Buildings.EnergyStorage:
+        canvas.style.cursor = 'url(/assets/icons/energy_storage.png), auto';
+        break;
+      case Buildings.Miner:
+        canvas.style.cursor = 'url(/assets/icons/miner.png), auto';
+        break;
+      case Buildings.Laser:
+        canvas.style.cursor = 'url(/assets/icons/laser.png), auto';
+        break;
+      case Buildings.RepairStation:
+        canvas.style.cursor = 'url(/assets/icons/repair_station.png), auto';
+        break;
+      case Buildings.LongRangeMissileStation:
+        canvas.style.cursor =
+          'url(/assets/icons/long_range_missile_station.png), auto';
+        break;
+      case Buildings.EnergyGridConnector:
+        canvas.style.cursor =
+          'url(/assets/icons/energy_grid_connector.png), auto';
+        break;
+      default:
+        canvas.style.cursor = 'auto';
+        break;
+    }
+
     this.selectedBuildingType = buildingType; // Setzt den aktuellen Gebäudetyp
   }
 
@@ -176,6 +211,9 @@ export class TheSpaceGameCanvasComponent implements OnInit {
   }
 
   onCanvasClick(event: MouseEvent) {
+    const canvas = document.getElementsByTagName(
+      'canvas'
+    )[0] as HTMLCanvasElement;
     const rect = this.gameCanvas.nativeElement.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
@@ -184,6 +222,8 @@ export class TheSpaceGameCanvasComponent implements OnInit {
     if (this.selectedBuildingType !== null) {
       const position = new Vector2D(x, y);
       if (this.selectedBuildingType !== null) {
+        canvas.style.cursor = 'auto';
+        this.gameBar.resetSelectionAndHighlight();
         const newBuilding = this.gameManager.createBuilding(
           this.selectedBuildingType,
           position

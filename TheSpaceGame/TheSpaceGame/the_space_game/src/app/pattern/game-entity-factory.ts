@@ -35,7 +35,7 @@ export class GameEntityFactory implements AbstractGameEntityFactory {
   public CreateEnergyGridConnector(
     position: Vector2D,
     startposition: Vector2D,
-    endposition: Vector2D
+    endposition: Vector2D,
   ): IntermediateBuilding {
     return new EnergyGridConnector(position, startposition, endposition);
   }

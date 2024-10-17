@@ -1,9 +1,9 @@
 export enum Buildings {
-    Reactor,
-    Laser,
-    LongRangeMissileStation,
-    Miner,
-    EnergyStorage,
-    EnergyGridConnector,
-    RepairStation
+  Reactor,
+  Laser,
+  LongRangeMissileStation,
+  Miner,
+  EnergyStorage,
+  EnergyGridConnector,
+  RepairStation,
 }

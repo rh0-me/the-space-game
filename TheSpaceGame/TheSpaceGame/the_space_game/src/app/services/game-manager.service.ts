@@ -28,7 +28,7 @@ export class GameManagerService {
 
   constructor(
     private economyService: EconomyService,
-    private enemyWaveManager: EnemyWaveManagerService
+    private enemyWaveManager: EnemyWaveManagerService,
   ) {
     this.#initializeGame();
   }
@@ -89,16 +89,22 @@ export class GameManagerService {
         }
         break;
       case Buildings.EnergyGridConnector:
-        if (this.economyService.consumeMinerals(EnergyGridConnector.BUILD_COSTS)) {
+        if (
+          this.economyService.consumeMinerals(EnergyGridConnector.BUILD_COSTS)
+        ) {
           newBuilding = this.gameEntityFactory.CreateEnergyGridConnector(
             position,
             new Vector2D(0, 0),
-            new Vector2D(0, 0)
+            new Vector2D(0, 0),
           );
         }
         break;
       case Buildings.LongRangeMissileStation:
-        if (this.economyService.consumeMinerals(LongRangeMissileStation.BUILD_COSTS)) {
+        if (
+          this.economyService.consumeMinerals(
+            LongRangeMissileStation.BUILD_COSTS,
+          )
+        ) {
           newBuilding =
             this.gameEntityFactory.CreateLongRangeMissileStation(position);
         }

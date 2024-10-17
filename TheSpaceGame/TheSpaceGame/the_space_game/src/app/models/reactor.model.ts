@@ -19,7 +19,7 @@ export class Reactor extends PlaceableBuilding {
       Reactor.DAMAGE_POINTS,
       Reactor.VECTOR_WIDTH,
       Reactor.VECTOR_HEIGHT,
-      Reactor.UPGRADE_COSTS
+      Reactor.UPGRADE_COSTS,
     );
   }
 
@@ -38,18 +38,18 @@ export class Reactor extends PlaceableBuilding {
         this.xDrawingStartingPoint,
         this.yDrawingStartingPoint,
         Reactor.VECTOR_WIDTH,
-        Reactor.VECTOR_HEIGHT
+        Reactor.VECTOR_HEIGHT,
       );
 
       ctx.fillText(
         'Reactor',
         this.xDrawingStartingPoint,
-        this.yDrawingStartingPoint - 5
+        this.yDrawingStartingPoint - 5,
       );
       ctx.fillText(
         `Level: ${this.level}`,
         this.xDrawingStartingPoint,
-        this.yDrawingStartingPoint + 75
+        this.yDrawingStartingPoint + 75,
       );
     }
   }

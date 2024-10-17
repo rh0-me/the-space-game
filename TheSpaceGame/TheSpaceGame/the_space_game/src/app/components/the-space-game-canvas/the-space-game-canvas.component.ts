@@ -52,7 +52,7 @@ export class TheSpaceGameCanvasComponent implements OnInit {
    */
   public ngAfterViewInit(): void {
     this.ctx = this.gameCanvas.nativeElement.getContext(
-      '2d'
+      '2d',
     ) as CanvasRenderingContext2D;
     this.#startGameLoop();
   }
@@ -74,7 +74,7 @@ export class TheSpaceGameCanvasComponent implements OnInit {
       0,
       0,
       this.gameCanvas.nativeElement.width,
-      this.gameCanvas.nativeElement.height
+      this.gameCanvas.nativeElement.height,
     );
   }
 
@@ -121,7 +121,7 @@ export class TheSpaceGameCanvasComponent implements OnInit {
   }
   selectBuilding(buildingType: Buildings): void {
     const canvas = document.getElementsByTagName(
-      'canvas'
+      'canvas',
     )[0] as HTMLCanvasElement;
 
     switch (buildingType) {
@@ -174,7 +174,7 @@ export class TheSpaceGameCanvasComponent implements OnInit {
       0,
       0,
       this.gameCanvas.nativeElement.width,
-      this.gameCanvas.nativeElement.height
+      this.gameCanvas.nativeElement.height,
     );
     this.ctx.globalAlpha = 1.0;
     // Hintergrund des Spielfelds zeichnen (optional: Bild oder Farbe)
@@ -183,7 +183,7 @@ export class TheSpaceGameCanvasComponent implements OnInit {
       0,
       0,
       this.gameCanvas.nativeElement.width,
-      this.gameCanvas.nativeElement.height
+      this.gameCanvas.nativeElement.height,
     );
 
     // Alle Gebäude zeichnen
@@ -199,7 +199,7 @@ export class TheSpaceGameCanvasComponent implements OnInit {
         0,
         0,
         this.gameCanvas.nativeElement.width,
-        this.gameCanvas.nativeElement.height
+        this.gameCanvas.nativeElement.height,
       );
     }
   }
@@ -212,7 +212,7 @@ export class TheSpaceGameCanvasComponent implements OnInit {
 
   onCanvasClick(event: MouseEvent) {
     const canvas = document.getElementsByTagName(
-      'canvas'
+      'canvas',
     )[0] as HTMLCanvasElement;
     const rect = this.gameCanvas.nativeElement.getBoundingClientRect();
     const x = event.clientX - rect.left;
@@ -226,7 +226,7 @@ export class TheSpaceGameCanvasComponent implements OnInit {
         this.gameBar.resetSelectionAndHighlight();
         const newBuilding = this.gameManager.createBuilding(
           this.selectedBuildingType,
-          position
+          position,
         );
         if (newBuilding) {
           this.buildings.push(newBuilding); // Neues Gebäude zur Liste hinzufügen

@@ -19,7 +19,7 @@ export class Miner extends PlaceableBuilding {
       Miner.DAMAGE_POINTS,
       Miner.VECTOR_WIDTH,
       Miner.VECTOR_HEIGHT,
-      Miner.UPGRADE_COSTS
+      Miner.UPGRADE_COSTS,
     );
   }
 
@@ -40,18 +40,18 @@ export class Miner extends PlaceableBuilding {
         this.xDrawingStartingPoint,
         this.yDrawingStartingPoint,
         50,
-        50
+        50,
       );
 
       ctx.fillText(
         'Miner',
         this.xDrawingStartingPoint,
-        this.yDrawingStartingPoint - 5
+        this.yDrawingStartingPoint - 5,
       );
       ctx.fillText(
         `Level: ${this.level}`,
         this.xDrawingStartingPoint,
-        this.yDrawingStartingPoint + 75
+        this.yDrawingStartingPoint + 75,
       );
     }
   }

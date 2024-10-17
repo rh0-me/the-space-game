@@ -21,7 +21,7 @@ export class Laser extends PlaceableBuilding {
       Laser.DAMAGE_POINTS,
       Laser.VECTOR_WIDTH,
       Laser.VECTOR_HEIGHT,
-      Laser.UPGRADE_COSTS
+      Laser.UPGRADE_COSTS,
     );
   }
 
@@ -47,18 +47,18 @@ export class Laser extends PlaceableBuilding {
         this.xDrawingStartingPoint,
         this.yDrawingStartingPoint,
         50,
-        50
+        50,
       );
 
       ctx.fillText(
         'Laser',
         this.xDrawingStartingPoint,
-        this.yDrawingStartingPoint - 5
+        this.yDrawingStartingPoint - 5,
       );
       ctx.fillText(
         `Level: ${this.level}`,
         this.position.x,
-        this.position.y + 75
+        this.position.y + 75,
       );
     }
   }

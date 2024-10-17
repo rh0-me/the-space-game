@@ -28,7 +28,7 @@ export class GameBarComponent {
   }
   private highlightAndSelectToggle(
     target: HTMLElement,
-    buildingType: Buildings
+    buildingType: Buildings,
   ) {
     let selectedBuildingType = undefined;
     if (!this.isCurrentlySelectedBuilding(target)) {
@@ -42,7 +42,7 @@ export class GameBarComponent {
       'Buildingtype:',
       this.currentBuildingType,
       'BuildingElement:',
-      this.currentSelectedBuildingElement
+      this.currentSelectedBuildingElement,
     );
 
     this.selectedBuildingEvent.emit(selectedBuildingType); // emit selected building type to game canvas
@@ -66,7 +66,7 @@ export class GameBarComponent {
 
   private selectAndHighlightBuilding(
     target: HTMLElement,
-    buildingType: Buildings
+    buildingType: Buildings,
   ): void {
     target.style.backgroundColor = 'aquamarine';
     this.currentSelectedBuildingElement = target;
@@ -112,43 +112,43 @@ export class GameBarComponent {
       case '1':
         buildingType = Buildings.Reactor;
         buildingButton = document.getElementsByClassName(
-          'reactor'
+          'reactor',
         )[0] as HTMLElement;
         break;
       case '2':
         buildingType = Buildings.Laser;
         buildingButton = document.getElementsByClassName(
-          'laser'
+          'laser',
         )[0] as HTMLElement;
         break;
       case '3':
         buildingType = Buildings.LongRangeMissileStation;
         buildingButton = document.getElementsByClassName(
-          'missile-station'
+          'missile-station',
         )[0] as HTMLElement;
         break;
       case '4':
         buildingType = Buildings.Miner;
         buildingButton = document.getElementsByClassName(
-          'miner'
+          'miner',
         )[0] as HTMLElement;
         break;
       case '5':
         buildingType = Buildings.EnergyStorage;
         buildingButton = document.getElementsByClassName(
-          'energy-storage'
+          'energy-storage',
         )[0] as HTMLElement;
         break;
       case '6':
         buildingType = Buildings.EnergyGridConnector;
         buildingButton = document.getElementsByClassName(
-          'grid-connector'
+          'grid-connector',
         )[0] as HTMLElement;
         break;
       case '7':
         buildingType = Buildings.RepairStation;
         buildingButton = document.getElementsByClassName(
-          'repair-station'
+          'repair-station',
         )[0] as HTMLElement;
         break;
       default:

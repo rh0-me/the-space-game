@@ -20,7 +20,7 @@ export class EnergyStorage extends PlaceableBuilding {
       EnergyStorage.DAMAGE_POINTS,
       EnergyStorage.VECTOR_WIDTH,
       EnergyStorage.VECTOR_HEIGHT,
-      EnergyStorage.UPGRADE_COSTS
+      EnergyStorage.UPGRADE_COSTS,
     );
   }
 
@@ -39,17 +39,17 @@ export class EnergyStorage extends PlaceableBuilding {
         this.xDrawingStartingPoint,
         this.yDrawingStartingPoint,
         50,
-        50
+        50,
       );
       ctx.fillText(
         'Energy Station',
         this.xDrawingStartingPoint,
-        this.yDrawingStartingPoint - 5
+        this.yDrawingStartingPoint - 5,
       );
       ctx.fillText(
         `Level: ${this.level}`,
         this.xDrawingStartingPoint,
-        this.yDrawingStartingPoint + 75
+        this.yDrawingStartingPoint + 75,
       );
     }
   }

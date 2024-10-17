@@ -22,7 +22,7 @@ export class LongRangeMissileStation extends PlaceableBuilding {
       LongRangeMissileStation.DAMAGE_POINTS,
       LongRangeMissileStation.VECTOR_WIDTH,
       LongRangeMissileStation.VECTOR_HEIGHT,
-      LongRangeMissileStation.UPGRADE_COSTS
+      LongRangeMissileStation.UPGRADE_COSTS,
     );
 
     this.buildCosts = LongRangeMissileStation.BUILD_COSTS;
@@ -52,18 +52,18 @@ export class LongRangeMissileStation extends PlaceableBuilding {
         this.xDrawingStartingPoint,
         this.yDrawingStartingPoint,
         50,
-        50
+        50,
       );
 
       ctx.fillText(
         'LRMS',
         this.xDrawingStartingPoint,
-        this.yDrawingStartingPoint - 5
+        this.yDrawingStartingPoint - 5,
       );
       ctx.fillText(
         `Level: ${this.level}`,
         this.xDrawingStartingPoint,
-        this.yDrawingStartingPoint + 75
+        this.yDrawingStartingPoint + 75,
       );
     }
   }

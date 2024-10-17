@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Enemy } from '../models/enemy.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EnemyWaveManagerService {
   public enemies: Enemy[] = [];

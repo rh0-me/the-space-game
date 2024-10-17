@@ -23,7 +23,7 @@ export class RepairStation extends PlaceableBuilding {
       RepairStation.DAMAGE_POINTS,
       RepairStation.VECTOR_WIDTH,
       RepairStation.VECTOR_HEIGHT,
-      RepairStation.UPGRADE_COSTS
+      RepairStation.UPGRADE_COSTS,
     );
   }
 
@@ -61,17 +61,17 @@ export class RepairStation extends PlaceableBuilding {
         this.xDrawingStartingPoint,
         this.yDrawingStartingPoint,
         50,
-        50
+        50,
       );
       ctx.fillText(
         'Repair Station',
         this.xDrawingStartingPoint,
-        this.yDrawingStartingPoint - 5
+        this.yDrawingStartingPoint - 5,
       );
       ctx.fillText(
         `Level: ${this.level}`,
         this.xDrawingStartingPoint,
-        this.yDrawingStartingPoint + 75
+        this.yDrawingStartingPoint + 75,
       );
     }
   }

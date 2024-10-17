@@ -10,7 +10,7 @@ export abstract class Building {
     public position: Vector2D,
     public health: number,
     public width: number,
-    public height: number
+    public height: number,
   ) {}
 
   protected xDrawingStartingPoint = this.position.x - this.width / 2;
@@ -34,7 +34,7 @@ export abstract class Building {
       this.xDrawingStartingPoint,
       this.yDrawingStartingPoint,
       this.width,
-      this.height
+      this.height,
     );
     ctx.setLineDash([]);
   }

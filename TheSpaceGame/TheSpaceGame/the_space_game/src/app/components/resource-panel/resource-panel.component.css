@@ -1,9 +1,19 @@
 .resource-panel {
-  border: 1px solid #ccc;
-  padding: 10px;
-  background-color: #f8f8f8;
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  width: 150px;
+  border: 1px #ccc;
+  padding: 5px;
+  /*position: fixed;*/
+  /*top: 10px;*/
+  /*right: 10px;*/
+  /*width: 150px;*/
+  background-color: #122031;
+  color: white;
+  max-width: 100%;
+  /*overflow: auto;*/
+  /*display: flex;*/
+  /*flex-direction: column;*/
 }
+
+p {
+  margin: 0;
+}
+

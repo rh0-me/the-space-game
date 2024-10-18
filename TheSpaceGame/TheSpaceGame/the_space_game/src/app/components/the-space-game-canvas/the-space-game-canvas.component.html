@@ -1,10 +1,10 @@
 <div class="game-container">
-  <canvas
-    #canvas
-    [width]="innerWidth - 100"
-    [height]="innerHeight - 100"
-    (click)="onCanvasClick($event)"
-    style="border: 1px solid black"
+  <canvas id="galaxy"
+          #canvas
+          [width]="innerWidth - 100"
+          [height]="innerHeight - 100"
+          (click)="onCanvasClick($event)"
+          style="border: 1px solid black"
   ></canvas>
 </div>
 
@@ -12,28 +12,3 @@
   (selectedBuildingEvent)="buildingInGameBarSelected($event)"
 ></app-game-bar>
 
-<!--<div class="controls">
-    <button class="building-btn reactor" (click)="selectBuilding(Buildings.Reactor)">
-        <span>Reaktor</span>
-    </button>
-    <button class="building-btn laser" (click)="selectBuilding(Buildings.Laser)">
-        <span>Laser</span>
-    </button>
-    <button class="building-btn missile-station" (click)="selectBuilding(Buildings.LongRangeMissileStation)">
-        <span>LRMS</span>
-    </button>
-    <button class="building-btn miner" (click)="selectBuilding(Buildings.Miner)">
-        <span>Miner</span>
-    </button>
-    <button class="building-btn energy-storage" (click)="selectBuilding(Buildings.EnergyStorage)">
-        <span>Energy Storage</span>
-    </button>
-    <button class="building-btn grid-connector" (click)="selectBuilding(Buildings.EnergyGridConnector)">
-        <span>Connector</span>
-    </button>
-    <button class="building-btn repair-station" (click)="selectBuilding(Buildings.RepairStation)">
-        <span>Repair-Station</span>
-    </button>
-</div>-->
-
-<!--<canvas #canvas style="border: 1px solid" [width]="innerWidth-100" [height]="innerHeight-100">Fallback content</canvas>-->

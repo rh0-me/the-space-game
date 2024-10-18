@@ -5,12 +5,12 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { Buildings } from 'src/app/enums/buildings.enum';
-import { Building } from 'src/app/models/building.model';
-import { Reactor } from 'src/app/models/reactor.model';
-import { Vector2D } from 'src/app/models/vector2d.model';
-import { GameManagerService } from 'src/app/services/game-manager.service';
-import { GameBarComponent } from '../game-bar/game-bar.component';
+import {Buildings} from 'src/app/enums/buildings.enum';
+import {Building} from 'src/app/models/building.model';
+import {Reactor} from 'src/app/models/reactor.model';
+import {Vector2D} from 'src/app/models/vector2d.model';
+import {GameManagerService} from 'src/app/services/game-manager.service';
+import {GameBarComponent} from '../game-bar/game-bar.component';
 
 @Component({
   selector: 'game-canvas',
@@ -19,7 +19,7 @@ import { GameBarComponent } from '../game-bar/game-bar.component';
 })
 export class TheSpaceGameCanvasComponent implements OnInit {
   Buildings = Buildings;
-  @ViewChild('canvas', { static: true })
+  @ViewChild('canvas', {static: true})
   gameCanvas!: ElementRef<HTMLCanvasElement>;
   @ViewChild(GameBarComponent) gameBar!: GameBarComponent;
 
@@ -40,12 +40,52 @@ export class TheSpaceGameCanvasComponent implements OnInit {
 
   private selectedBuildingType: Buildings | null = null;
 
+  private stars: { x: number; y: number; speed: number; color: number }[] = [];
+  private deathstar = {
+    image: new Image(),
+    laser: 0,
+    x: innerWidth + 100,
+    y: (innerHeight / 2) - 150,
+    update: function () {
+      this.x = this.x - 2/3;
+      this.laser--;
+    },
+    draw: function (ctx: CanvasRenderingContext2D) {
+      if (this.laser > 0) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = '#FFF'
+        ctx.shadowColor = '#00960a';
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
+        ctx.shadowBlur = 20;
+        ctx.moveTo(this.x + 85, this.y + 75);
+        ctx.lineTo(0, this.y + 75);
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+  };
+
+  private music = new Audio('https://cdn.rawgit.com/ManzDev/codevember2017/master/assets/imperial-8bit-by-crig.mp3');
+
   public ngOnInit(): void {
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
+    for (let i = 0; i < 500; i++) {
+      this.stars.push({
+        x: ~~(Math.random() * this.innerWidth),
+        y: ~~(Math.random() * this.innerHeight),
+        speed: ~~(1 + Math.random() * 5),
+        color: ~~(Math.random() * 3),
+      });
+    }
+    this.deathstar.image.src = 'https://cdn.rawgit.com/ManzDev/codevember2017/master/assets/death-star-256x256.png';
   }
 
-  constructor(private gameManager: GameManagerService) {}
+  constructor(private gameManager: GameManagerService) {
+  }
 
   /**
    * Einmaliges Initialisieren des Contextes und Starten des Game-Loops
@@ -116,14 +156,13 @@ export class TheSpaceGameCanvasComponent implements OnInit {
       this.rectX += this.speed; // D - nach rechts
     }
   }
+
   buildingInGameBarSelected(building: Buildings) {
     this.selectBuilding(building);
   }
-  selectBuilding(buildingType: Buildings): void {
-    const canvas = document.getElementsByTagName(
-      'canvas',
-    )[0] as HTMLCanvasElement;
 
+  selectBuilding(buildingType: Buildings): void {
+    const canvas = this.gameCanvas.nativeElement;
     switch (buildingType) {
       case Buildings.Reactor:
         canvas.style.cursor = 'url(/assets/icons/reactor.png), auto';
@@ -185,7 +224,27 @@ export class TheSpaceGameCanvasComponent implements OnInit {
       this.gameCanvas.nativeElement.width,
       this.gameCanvas.nativeElement.height,
     );
-
+    {
+      // Draw stars
+      for (let i = 0; i < 500; i++) {
+        var s = this.stars[i];
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeStyle = ['#444', '#888', '#FFF'][this.stars[i].color];
+        this.ctx.strokeRect(s.x, s.y, 1, 1);
+        this.stars[i].x -= this.stars[i].speed;
+        if (this.stars[i].x < 0)
+          this.stars[i].x = this.innerWidth;
+      }
+    }
+    {
+      // Draw deathstar
+      this.deathstar.update();
+      if (~~(Math.random() * 250) == 1)
+        this.deathstar.laser = 15 + ~~(Math.random() * 25);
+      this.ctx.drawImage(this.deathstar.image, this.deathstar.x, this.deathstar.y);
+      // Laser
+      this.deathstar.draw(this.ctx);
+    }
     // Alle Gebäude zeichnen
     this.buildings.forEach((building) => {
       //building.draw(this.ctx);  // Verwende die `draw`-Methode der Gebäude
@@ -211,9 +270,8 @@ export class TheSpaceGameCanvasComponent implements OnInit {
   }
 
   onCanvasClick(event: MouseEvent) {
-    const canvas = document.getElementsByTagName(
-      'canvas',
-    )[0] as HTMLCanvasElement;
+    this.music.play();
+    const canvas = this.gameCanvas.nativeElement;
     const rect = this.gameCanvas.nativeElement.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;

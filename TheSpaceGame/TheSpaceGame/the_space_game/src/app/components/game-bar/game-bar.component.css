@@ -1,4 +1,8 @@
 /* Allgemeiner Stil für alle Buttons */
+div {
+  background-color: #122031;
+}
+
 .controls {
   display: flex;
   direction: ltr;

@@ -1,57 +1,59 @@
-<div class="controls">
-  <button
-    class="building-btn reactor"
-    (click)="buildingClickHandler(Buildings.Reactor, $event)"
-  >
-    <span>Reaktor</span>
-  </button>
-  <button
-    class="building-btn laser"
-    (click)="buildingClickHandler(Buildings.Laser, $event)"
-  >
-    <span>Laser</span>
-  </button>
-  <button
-    class="building-btn missile-station"
-    (click)="buildingClickHandler(Buildings.LongRangeMissileStation, $event)"
-  >
-    <span>LRMS</span>
-  </button>
-  <button
-    class="building-btn miner"
-    (click)="buildingClickHandler(Buildings.Miner, $event)"
-  >
-    <span>Miner</span>
-  </button>
-  <button
-    class="building-btn energy-storage"
-    (click)="buildingClickHandler(Buildings.EnergyStorage, $event)"
-  >
-    <span>Energy Storage</span>
-  </button>
-  <button
-    class="building-btn grid-connector"
-    (click)="buildingClickHandler(Buildings.EnergyGridConnector, $event)"
-  >
-    <span>Connector</span>
-  </button>
-  <button
-    class="building-btn repair-station"
-    (click)="buildingClickHandler(Buildings.RepairStation, $event)"
-  >
-    <span>Repair-Station</span>
-  </button>
-
-  <div class="game-status">
-    <p>{{ this.getTimeString() }}</p>
-
-    <button type="button" class="btn btn-light">
-      <i class="bi bi-pause-circle-fill"></i>
+<div>
+  <div class="controls">
+    <button
+      class="building-btn reactor"
+      (click)="buildingClickHandler(Buildings.Reactor, $event)"
+    >
+      <span>Reaktor</span>
+    </button>
+    <button
+      class="building-btn laser"
+      (click)="buildingClickHandler(Buildings.Laser, $event)"
+    >
+      <span>Laser</span>
+    </button>
+    <button
+      class="building-btn missile-station"
+      (click)="buildingClickHandler(Buildings.LongRangeMissileStation, $event)"
+    >
+      <span>LRMS</span>
+    </button>
+    <button
+      class="building-btn miner"
+      (click)="buildingClickHandler(Buildings.Miner, $event)"
+    >
+      <span>Miner</span>
+    </button>
+    <button
+      class="building-btn energy-storage"
+      (click)="buildingClickHandler(Buildings.EnergyStorage, $event)"
+    >
+      <span>Energy Storage</span>
+    </button>
+    <button
+      class="building-btn grid-connector"
+      (click)="buildingClickHandler(Buildings.EnergyGridConnector, $event)"
+    >
+      <span>Connector</span>
+    </button>
+    <button
+      class="building-btn repair-station"
+      (click)="buildingClickHandler(Buildings.RepairStation, $event)"
+    >
+      <span>Repair-Station</span>
     </button>
 
-    <button type="button" class="btn btn-light">
-      <i class="bi bi-play-fill"></i>
-    </button>
+    <div class="game-status">
+      <p>{{ this.getTimeString() }}</p>
+
+      <button type="button" class="btn btn-light">
+        <i class="bi bi-pause-circle-fill"></i>
+      </button>
+
+      <button type="button" class="btn btn-light">
+        <i class="bi bi-play-fill"></i>
+      </button>
+    </div>
+    <app-resource-panel></app-resource-panel>
   </div>
-  <app-resource-panel></app-resource-panel>
 </div>

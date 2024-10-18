@@ -1,9 +1,7 @@
-import { Component, EventEmitter, HostListener, Output } from '@angular/core';
-import { Buildings } from 'src/app/enums/buildings.enum';
-import { GameManagerService } from 'src/app/services/game-manager.service';
-import { Moment } from 'moment/moment';
-import * as moment from 'moment/moment';
-import { throwError } from 'rxjs';
+import {Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
+import {Buildings} from 'src/app/enums/buildings.enum';
+import {GameManagerService} from 'src/app/services/game-manager.service';
+import {format} from 'date-fns';
 
 @Component({
   selector: 'app-game-bar',
@@ -17,7 +15,9 @@ export class GameBarComponent {
   private currentSelectedBuildingElement: HTMLElement | null = null;
   @Output() selectedBuildingEvent = new EventEmitter<Buildings>();
 
-  constructor(private gameService: GameManagerService) {}
+  constructor(private gameService: GameManagerService) {
+  }
+
   //#region BuildingClickHandler
   buildingClickHandler(buildingType: Buildings, event: MouseEvent): void {
     const target = event.currentTarget as HTMLElement;
@@ -26,6 +26,7 @@ export class GameBarComponent {
     }
     this.highlightAndSelectToggle(target, buildingType);
   }
+
   private highlightAndSelectToggle(
     target: HTMLElement,
     buildingType: Buildings,
@@ -47,6 +48,7 @@ export class GameBarComponent {
 
     this.selectedBuildingEvent.emit(selectedBuildingType); // emit selected building type to game canvas
   }
+
   private isCurrentlySelectedBuilding(target: HTMLElement) {
     return (
       this.currentSelectedBuildingElement &&
@@ -72,6 +74,7 @@ export class GameBarComponent {
     this.currentSelectedBuildingElement = target;
     this.currentBuildingType = buildingType;
   }
+
   //#endregion
 
   @HostListener('window:keydown', ['$event'])
@@ -105,6 +108,7 @@ export class GameBarComponent {
       }
     }
   }
+
   private getBuildingAndButton(key: string) {
     let buildingType: Buildings | null = null;
     let buildingButton: HTMLElement | null = null;
@@ -159,7 +163,8 @@ export class GameBarComponent {
     }
     return [buildingType, buildingButton];
   }
+
   public getTimeString(): String {
-    return moment().format('h:mm:ss a'); // October 7th 2024, 11:30:50 am
+    return format(new Date(), 'h:mm:ss a'); // October 7th 2024, 11:30:50 am
   }
 }

@@ -1,8 +1,11 @@
 /* Allgemeiner Stil für alle Buttons */
 .controls {
   display: flex;
-  direction: column;
+  direction: ltr;
+  flex-direction: row;
   gap: 1em;
+  background-color: #122031;
+  margin-left: 50px;
 }
 
 .building-btn {
@@ -58,4 +61,49 @@
 
 .repair-station {
   background-image: url("/assets/icons/repair_station.png");
+}
+
+.game-status {
+  background-color: #122031;
+  color: white;
+  padding: 10px;
+}
+
+/*.controls > :nth-last-child(0) {*/
+/*  background-color: #122031;*/
+/*  color: white;*/
+/*}*/
+
+
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.btn-light {
+  background-color: #f8f9fa;
+  color: #343a40;
+}
+
+button.btn-light:hover {
+  background-color: #e2e6ea;
+}
+
+button.building-btn {
+  background-color: #2e557c;
+  color: white;
+}
+
+button.building-btn:hover {
+  background-color: #122031;
+}
+
+button.building-btn span {
+  display: block;
+  font-weight: bold;
 }
